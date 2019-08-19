@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="EUC-KR">
-		<title>Cheon's blog</title>
-	</head>
-	
-	<body>
-		<div>
-			<h1><a href="">Cheon's blog</a></h1>
-		</div>
-		
-		{% for post in posts %}
-			<div>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	{% for post in posts %}
+		<div class="post">
+			<h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+			<div class="date">
 				<p>created: {{ post.created_date }}</p>
-				<h1><a href="">{{ post.title }}</a></h1>
-				<p>{{ post.text|linebreaksbr }}</p>
 			</div>
-		{% endfor %}
-		
-	</body>
-</html>
+			<p>{{ post.text|linebreaksbr }}</p>
+		</div>
+	{% endfor %}
+{% endblock %}
